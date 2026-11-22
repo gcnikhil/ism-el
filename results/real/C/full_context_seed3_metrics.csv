@@ -1,0 +1,16 @@
+name,value,run_id,seed,scenario,policy
+data_wait_ms,491.3812999995389,real-C-full_context-seed3,3,C,full_context
+data_wait_pct,6.479331182038858,real-C-full_context-seed3,3,C,full_context
+throughput,316.46289423117753,real-C-full_context-seed3,3,C,full_context
+fast_hit_rate,1.0,real-C-full_context-seed3,3,C,full_context
+mid_hit_rate,0.0,real-C-full_context-seed3,3,C,full_context
+slow_hit_rate,0.0,real-C-full_context-seed3,3,C,full_context
+migration_bytes,9241005.0,real-C-full_context-seed3,3,C,full_context
+wasted_prefetch_bytes,0.0,real-C-full_context-seed3,3,C,full_context
+latency_mean_ms,0.050630084325396806,real-C-full_context-seed3,3,C,full_context
+latency_p95_ms,0.060131510416666666,real-C-full_context-seed3,3,C,full_context
+latency_p99_ms,0.060131510416666666,real-C-full_context-seed3,3,C,full_context
+elapsed_ms,7583.827500000014,real-C-full_context-seed3,3,C,full_context
+read_count,84.0,real-C-full_context-seed3,3,C,full_context
+sample_count,2400.0,real-C-full_context-seed3,3,C,full_context
+mode,1.0,real-C-full_context-seed3,3,C,full_context

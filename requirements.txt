@@ -1,0 +1,18 @@
+# ContextTier dependencies.
+# Core emulator + data preparation + tests.
+numpy>=1.24
+pandas>=2.0
+pyarrow>=14.0
+PyYAML>=6.0
+Pillow>=10.0
+pytest>=8.0
+
+# Later phases (install when you reach them):
+scikit-learn>=1.3        # Phase 5
+xgboost>=2.0             # Phase 5/6
+gensim>=4.3              # Phase 6 Word2Vec
+gymnasium>=0.29          # Phase 7
+matplotlib>=3.7          # Phase 7 reward curves, Phase 9 plots
+streamlit>=1.30          # Phase 10
+uvicorn>=0.52            # Streamlit ASGI server; older versions break websockets 17.x
+torch>=2.2               # Phase 3, CPU build only; not needed for virtual mode

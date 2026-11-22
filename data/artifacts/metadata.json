@@ -1,0 +1,18 @@
+{
+  "chunk_size_samples": 50,
+  "dataset": "CIFAR-10 (HuggingFace Arrow)",
+  "difficulty_model": {
+    "decay_per_seen": 0.7,
+    "distribution": "seeded lognormal with per-seen decay",
+    "lognormal_mu": 0.0,
+    "lognormal_sigma": 1.0,
+    "oversample_fraction": 0.2,
+    "seed": 0
+  },
+  "note": "Scaled-down emulation. Difficulty decay and hard-example oversampling are applied by the workload generator at runtime.",
+  "schema": "img: struct<bytes: binary, path: string>\n  child 0, bytes: binary\n  child 1, path: string\nlabel: int64\n-- schema metadata --\nhuggingface: '{\"info\": {\"features\": {\"img\": {\"_type\": \"Image\"}, \"label\": ' + 127",
+  "train_chunks": 1000,
+  "train_rows": 50000,
+  "validation_chunks": 200,
+  "validation_rows": 10000
+}

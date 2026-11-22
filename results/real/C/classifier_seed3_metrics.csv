@@ -1,0 +1,16 @@
+name,value,run_id,seed,scenario,policy
+data_wait_ms,187.89330001338385,real-C-classifier-seed3,3,C,classifier
+data_wait_pct,2.3082645230988192,real-C-classifier-seed3,3,C,classifier
+throughput,294.8394038021876,real-C-classifier-seed3,3,C,classifier
+fast_hit_rate,1.0,real-C-classifier-seed3,3,C,classifier
+mid_hit_rate,0.0,real-C-classifier-seed3,3,C,classifier
+slow_hit_rate,0.0,real-C-classifier-seed3,3,C,classifier
+migration_bytes,9241005.0,real-C-classifier-seed3,3,C,classifier
+wasted_prefetch_bytes,0.0,real-C-classifier-seed3,3,C,classifier
+latency_mean_ms,0.050630084325396806,real-C-classifier-seed3,3,C,classifier
+latency_p95_ms,0.060131510416666666,real-C-classifier-seed3,3,C,classifier
+latency_p99_ms,0.060131510416666666,real-C-classifier-seed3,3,C,classifier
+elapsed_ms,8140.024600002915,real-C-classifier-seed3,3,C,classifier
+read_count,84.0,real-C-classifier-seed3,3,C,classifier
+sample_count,2400.0,real-C-classifier-seed3,3,C,classifier
+mode,1.0,real-C-classifier-seed3,3,C,classifier

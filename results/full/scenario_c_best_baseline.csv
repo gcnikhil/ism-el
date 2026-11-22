@@ -1,0 +1,2 @@
+scenario,best_baseline,selection_metric,n_seeds,baseline_data_wait_ms_mean,baseline_data_wait_ms_std,focus_data_wait_ms_mean,focus_data_wait_ms_std,data_wait_saved_ms,data_wait_saved_pct,baseline_throughput,focus_throughput,throughput_gain,candidate_baselines,source
+C,arc,data_wait_ms_mean,20,0.0,0.0,0.0,0.0,0.0,0.0,732.5471094284989,735.2084390022704,2.6613295737715816,"['lru', 'lfu', 'arc']",results/full/summary.csv

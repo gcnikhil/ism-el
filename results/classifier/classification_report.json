@@ -1,0 +1,112 @@
+{
+  "split": {
+    "train_scenarios": [
+      "A",
+      "B"
+    ],
+    "train_seeds": [
+      0,
+      1,
+      2
+    ],
+    "test_scenario": "C",
+    "test_seeds": [
+      3,
+      4
+    ]
+  },
+  "train": {
+    "row_count": 30015,
+    "label_counts": {
+      "chunk": 21114,
+      "metadata": 7038,
+      "validation": 1800,
+      "checkpoint": 63
+    }
+  },
+  "test": {
+    "accuracy": 1.0,
+    "macro_f1": 1.0,
+    "labels": [
+      "checkpoint",
+      "chunk",
+      "metadata",
+      "validation"
+    ],
+    "confusion_matrix": [
+      [
+        42,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        7038,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        2346,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        1200
+      ]
+    ],
+    "feature_importance_gain": {
+      "size_kb": 563.1836547851562,
+      "phase_warmup": 2.4164011478424072,
+      "phase_train": 20.49127769470215,
+      "phase_validation": 588.1990356445312,
+      "epoch": 0.0007786452770233154,
+      "step": 0.30154070258140564,
+      "step_gap_log": 0.027885135263204575,
+      "fast_occupied_frac": 0.4113350510597229
+    },
+    "row_count": 10626,
+    "label_counts": {
+      "checkpoint": 42,
+      "chunk": 7038,
+      "metadata": 2346,
+      "validation": 1200
+    }
+  },
+  "test_no_phase_op": {
+    "features": [
+      "size_kb",
+      "log2_size",
+      "epoch",
+      "step",
+      "read_count_log",
+      "write_count_log",
+      "step_gap_log",
+      "tier_count",
+      "min_tier",
+      "max_tier",
+      "in_fast",
+      "in_mid",
+      "fast_occupied_frac",
+      "mid_occupied_frac",
+      "fast_free_frac"
+    ],
+    "accuracy": 1.0,
+    "macro_f1": 1.0
+  },
+  "classifier_policy": {
+    "scenario": "C",
+    "seeds": [
+      3,
+      4
+    ],
+    "data_wait_ms": 778.9606293951177,
+    "throughput": 10484.07559253444,
+    "fast_hit_rate": 0.8866213151927438,
+    "migration_bytes": 535549675.0
+  }
+}

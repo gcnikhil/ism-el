@@ -1,0 +1,9 @@
+{
+  "method": "paired percentile bootstrap of the mean difference",
+  "resamples": 10000,
+  "bootstrap_seed": 0,
+  "win_definition": "positive paired data_wait difference (baseline - focus), or positive throughput difference (focus - baseline)",
+  "p_values": "omitted: effect sizes and percentile intervals are reported instead",
+  "coverage": "20-seed main matrix plus every compute_ms sweep point on Scenario C",
+  "source": "results/full/raw_runs.csv"
+}

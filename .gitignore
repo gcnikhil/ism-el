@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Tooling and runtime state
+.streamlit/
+.coverage
+htmlcov/
+*.log
+logs/
+
+# CIFAR-10 source data and columnar caches exceed GitHub's 100 MB file limit.
+# Regenerate locally via the documented preparation script instead.
+cifar10_dataset/
+*.arrow
+
+# Large derived binaries (regenerate with prepare_data.py / train.py).
+# Keep manifest.json and metadata.json, which are small reproducibility metadata.
+data/artifacts/*.npy
+data/artifacts/*.npz
+data/artifacts/*.bin
+data/artifacts/**/*.bin
+data/artifacts/hot_cache/
+data/artifacts/train_chunks/
+data/artifacts/validation_chunks/
+*.npy
+*.npz
+
+# Secrets and local config
+.env
+*.token
+
+# OS / editor metadata
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

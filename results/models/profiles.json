@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "device": "cpu",
+  "batch_size": 128,
+  "warmup_steps": 20,
+  "timed_steps": 200,
+  "profiles": {
+    "cnn": {
+      "parameter_count": 332778,
+      "median_step_ms": 82.68614999542478,
+      "p95_step_ms": 114.2342799990729,
+      "checkpoint_bytes": 4000603,
+      "peak_ram_bytes": 421974016
+    },
+    "mlp": {
+      "parameter_count": 789258,
+      "median_step_ms": 6.509899998491164,
+      "p95_step_ms": 9.425054996245308,
+      "checkpoint_bytes": 9476403,
+      "peak_ram_bytes": 410333184
+    }
+  }
+}

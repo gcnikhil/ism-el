@@ -1,0 +1,142 @@
+{
+  "phase": 8,
+  "engine": "virtual",
+  "config": {
+    "epochs": 3,
+    "compute_ms": 166.98580000047514,
+    "compute_ms_source": "results/real/step_time_benchmark.json (median of 200 CPU steps)",
+    "batch_size": 128,
+    "tiers": [
+      {
+        "id": 0,
+        "name": "fast",
+        "capacity_mb": 25,
+        "latency_ms": 0.01,
+        "bandwidth_mbps": 3000
+      },
+      {
+        "id": 1,
+        "name": "mid",
+        "capacity_mb": 60,
+        "latency_ms": 0.2,
+        "bandwidth_mbps": 500
+      },
+      {
+        "id": 2,
+        "name": "slow",
+        "capacity_mb": null,
+        "latency_ms": 8.0,
+        "bandwidth_mbps": 80
+      }
+    ],
+    "seeds": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19
+    ]
+  },
+  "policies": [
+    "allslow",
+    "allfast",
+    "lru",
+    "lfu",
+    "arc",
+    "clairvoyant",
+    "belady",
+    "context_rules",
+    "context_rules_noctx",
+    "classifier",
+    "embedding",
+    "full_context"
+  ],
+  "scenarios": [
+    "A",
+    "B",
+    "C",
+    "D"
+  ],
+  "sweeps": {
+    "fast_capacity_mb": [
+      10.0,
+      25.0,
+      50.0
+    ],
+    "compute_ms": [
+      1.0,
+      2.0,
+      5.0,
+      10.0,
+      20.0,
+      50.0
+    ],
+    "sweep_scenarios": [
+      "C"
+    ],
+    "sweep_policies": [
+      "lru",
+      "context_rules",
+      "full_context"
+    ]
+  },
+  "model_paths": {
+    "classifier": "results/classifier/model.json",
+    "embeddings": "results/embeddings/model.json",
+    "rl_agent": "results/rl/agent.json"
+  },
+  "missing_artefacts": [],
+  "run_counts": {
+    "matrix_runs": 960,
+    "sweep_runs": 540
+  },
+  "metric_names": [
+    "data_wait_ms",
+    "data_wait_pct",
+    "throughput",
+    "fast_hit_rate",
+    "mid_hit_rate",
+    "slow_hit_rate",
+    "migration_bytes",
+    "wasted_prefetch_bytes",
+    "latency_mean_ms",
+    "latency_p95_ms",
+    "latency_p99_ms",
+    "elapsed_ms",
+    "read_count",
+    "sample_count",
+    "promotion_ms",
+    "train_read_ms",
+    "validation_read_ms",
+    "other_read_ms",
+    "checkpoint_write_ms",
+    "train_compute_ms",
+    "flush_ms"
+  ],
+  "fast_hit_semantics": "fast_hit is Tier-0 residency when the read arrived, snapshotted before on_access/on_tick demand promotions; tier_served is the tier that actually served the read and may differ after a promotion.",
+  "elapsed_decomposition": "promotion_ms + train_read_ms + validation_read_ms + other_read_ms + checkpoint_write_ms + train_compute_ms + flush_ms == elapsed_ms exactly.",
+  "honesty_notes": [
+    "fast_hit is arrival-time residency, not post-promotion service tier.",
+    "compute_ms is the measured median of 200 real TinyCNN CPU steps on this machine, not a placeholder.",
+    "clairvoyant and belady are oracle upper bounds; Scenario C withholds the seeded oracle from clairvoyant.",
+    "context_rules receives constructor-injected declared types; context_rules_noctx is its empty-map ablation.",
+    "Learned models are trained once on their declared splits and are NOT retrained at each sweep point; sweeps measure transfer under shift.",
+    "Scenario D is excluded from the capacity sweep because run_simulation forces its fast tier large enough to hold every file.",
+    "All results come from the user's own runs; no numbers are illustrative or invented."
+  ]
+}

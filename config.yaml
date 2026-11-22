@@ -1,0 +1,105 @@
+# ContextTier configuration - scaled-down laptop emulation.
+# All paths are resolved relative to the project root (cross-platform).
+
+project: contexttier
+
+data:
+  train_arrow: cifar10_dataset/train/data-00000-of-00001.arrow
+  test_arrow: cifar10_dataset/test/data-00000-of-00001.arrow
+  artifacts_dir: data/artifacts
+  manifest: data/artifacts/manifest.json
+  metadata: data/artifacts/metadata.json
+  difficulty: data/artifacts/difficulty_train.npy
+
+artifacts:
+  hot_cache_files: 8          # number of hot-cache files derived from hard chunks
+  checkpoint_slots: 20        # reusable checkpoint file ids reserved in the manifest
+  id_seed: 20240517            # seeded permutation => opaque, type-agnostic ids
+
+tiers:
+  - {id: 0, name: fast, capacity_mb: 25,   latency_ms: 0.01, bandwidth_mbps: 3000}
+  - {id: 1, name: mid,  capacity_mb: 60,   latency_ms: 0.2,  bandwidth_mbps: 500}
+  - {id: 2, name: slow, capacity_mb: null, latency_ms: 8.0,  bandwidth_mbps: 80}
+
+chunk_size_samples: 50        # ~150 KB per decoded uint8 chunk
+batch_size: 128               # ~391 steps/epoch
+checkpoint_every_steps: 50
+validation_every_steps: null  # epoch-end by default
+# Measured on this machine: median of 200 real TinyCNN CPU steps, pure compute,
+# from results/real/step_time_benchmark.json (no placeholder remains).
+compute_ms: 166.98580000047514
+ckpt_size_mb: 4.0
+seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+epochs: 3                     # virtual-mode epochs per run (Phase 2 addition)
+sample_level_shuffle: false   # true would deviate from NoPFS chunk-level shuffle
+mode: virtual                 # virtual | real
+# Model selection is explicit so a CNN run remains byte-for-byte compatible
+# with the historical matrix unless profile-driven timing is requested.
+model:
+  name: cnn                   # cnn | mlp
+  compute_source: manual      # manual preserves baseline; profile uses profiles.json
+  profile_path: results/models/profiles.json
+real_subset_images: 2000        # small CPU-friendly subset (null = all 50,000)
+real_validation_chunks: 20      # shortened validation burst in real mode
+real_epochs: 1                  # epochs for real-mode runs / rank check
+max_prefetch_queue: 64        # bounded background migration queue
+
+classifier:                   # Phase 5 features + XGBoost file-type classifier
+  train_seeds: [0, 1, 2]
+  test_seeds: [3, 4]
+  train_scenarios: [A, B]     # hold out Scenario C entirely
+  test_scenario: C
+  model_path: results/classifier/model.json
+  report_dir: results/classifier
+  n_estimators: 100
+  max_depth: 4
+
+embeddings:                   # Phase 6 Word2Vec reuse predictor
+  train_scenarios: [A, B]
+  train_seeds: [0, 1, 2]
+  test_scenario: C            # focus: order depends on training state
+  test_seeds: [3, 4]
+  focus_seeds: [3, 4]
+  embedding_size: 16
+  window: 5
+  word2vec_epochs: 20
+  reuse_horizon: 5            # "reused soon" = within next 5 reads
+  n_estimators: 100
+  model_path: results/embeddings/model.json
+  report_dir: results/embeddings
+
+rl:                           # Phase 7 tabular Q-learning
+  train_scenarios: [B, C]
+  train_seeds: [0, 1, 2]
+  test_scenario: C            # hold out the state-dependent scenario
+  test_seeds: [3, 4]
+  episodes: 12
+  seed: 0
+  learning_rate: 0.1           # tabular step size (linear reference used 0.01)
+  gamma: 0.9
+  epsilon: 0.2
+  min_epsilon: 0.02
+  epsilon_decay: 0.995
+  max_td_error: 10.0
+  migration_weight: 0.05      # reward cost per MB migrated
+  wait_scale: 100.0           # reward scale for group data-wait (ms)
+  use_classifier: true        # set false for RL-only ablation
+  use_reuse_predictor: true   # set false for RL-only ablation
+  model_path: results/rl/agent.json
+  report_dir: results/rl
+
+difficulty:                   # virtual-mode synthetic difficulty model
+  lognormal_mu: 0.0
+  lognormal_sigma: 1.0
+  decay_per_seen: 0.7
+  oversample_fraction: 0.2
+
+temperature:                  # Phase 13 synthetic hot/warm/cold stress tests
+  hot_frac: 0.10
+  warm_frac: 0.30
+  hot_share: 0.60
+  warm_share: 0.30
+  zipf_s: null
+  drift_every_epochs: 2
+  ewma_half_life: 32
+  hysteresis_ticks: 3

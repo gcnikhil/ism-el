@@ -1,0 +1,66 @@
+{
+  "split": {
+    "train_scenarios": [
+      "B",
+      "C"
+    ],
+    "train_seeds": [
+      0,
+      1,
+      2
+    ],
+    "test_scenario": "C",
+    "test_seeds": [
+      3,
+      4
+    ]
+  },
+  "training": {
+    "episodes": 12,
+    "first_mean_reward": 0.8027780890799154,
+    "last_mean_reward": 0.9700562061093597,
+    "final_epsilon": 0.02,
+    "weight_updates": 63756
+  },
+  "evaluation": {
+    "full_context": {
+      "scenario": "C",
+      "seeds": [
+        3,
+        4
+      ],
+      "data_wait_ms": 748.1671166997427,
+      "throughput": 10580.450204681463,
+      "fast_hit_rate": 0.8809523809523809,
+      "migration_bytes": 535549675.0
+    },
+    "rl_only": {
+      "scenario": "C",
+      "seeds": [
+        3,
+        4
+      ],
+      "data_wait_ms": 770.192413086478,
+      "throughput": 10177.927407773474,
+      "fast_hit_rate": 0.9943310657596371,
+      "migration_bytes": 602619947.0
+    },
+    "lru": {
+      "scenario": "C",
+      "seeds": [
+        3,
+        4
+      ],
+      "data_wait_ms": 803.4772412115391,
+      "throughput": 10086.53582640615,
+      "fast_hit_rate": 1.0,
+      "migration_bytes": 602619947.0
+    }
+  },
+  "artefacts": {
+    "agent": "C:\\Users\\nikhi\\OneDrive\\Documents\\contexttier\\results\\rl\\agent.json",
+    "reward_curve_csv": "C:\\Users\\nikhi\\OneDrive\\Documents\\contexttier\\results\\rl\\reward_curves.csv",
+    "reward_curve_png": "C:\\Users\\nikhi\\OneDrive\\Documents\\contexttier\\results\\rl\\reward_curve.png"
+  },
+  "notes": "Reward = tier_service (fast 1.0 / mid 0.6 / origin 0.0) - wait/slow_latency - migration_weight*migration_MB - group_data_wait/wait_scale. Learned policy sees only observable features: no names, true types, oracle or declared types. DQN omitted deliberately: a tiny tabular Q-learner is sufficient and CPU/memory cheaper; linear function approximation was retained only as a reference because it diverged on this workload."
+}

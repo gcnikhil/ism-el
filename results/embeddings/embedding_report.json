@@ -1,0 +1,76 @@
+{
+  "split": {
+    "train_scenarios": [
+      "A",
+      "B"
+    ],
+    "train_seeds": [
+      0,
+      1,
+      2
+    ],
+    "test_scenario": "C",
+    "test_seeds": [
+      3,
+      4
+    ],
+    "reuse_horizon": 5
+  },
+  "train": {
+    "row_count": 30015
+  },
+  "test": {
+    "accuracy": 0.9990589121023904,
+    "roc_auc": 0.9989959289755443,
+    "row_count": 10626,
+    "positive_rate": 0.2206851119894598
+  },
+  "policies": {
+    "C": {
+      "embedding": {
+        "data_wait_ms": 803.4585644537266,
+        "throughput": 10086.548712580885,
+        "fast_hit_rate": 1.0,
+        "migration_bytes": 602618417.0
+      },
+      "lru": {
+        "data_wait_ms": 803.4772412115391,
+        "throughput": 10086.53582640615,
+        "fast_hit_rate": 1.0,
+        "migration_bytes": 602619947.0
+      },
+      "context_rules": {
+        "data_wait_ms": 778.9606293951177,
+        "throughput": 10484.07559253444,
+        "fast_hit_rate": 0.8866213151927438,
+        "migration_bytes": 535549675.0
+      }
+    },
+    "A": {
+      "embedding": {
+        "data_wait_ms": 857.8522846684331,
+        "throughput": 12084.087148952782,
+        "fast_hit_rate": 1.0,
+        "migration_bytes": 519071247.0
+      },
+      "lru": {
+        "data_wait_ms": 857.8522846684331,
+        "throughput": 12084.087148952782,
+        "fast_hit_rate": 1.0,
+        "migration_bytes": 519071247.0
+      },
+      "context_rules": {
+        "data_wait_ms": 857.8522846684331,
+        "throughput": 12084.087148952782,
+        "fast_hit_rate": 1.0,
+        "migration_bytes": 519071247.0
+      },
+      "clairvoyant": {
+        "data_wait_ms": 847.0838479822013,
+        "throughput": 12278.755479730662,
+        "fast_hit_rate": 1.0,
+        "migration_bytes": 519379255.0
+      }
+    }
+  }
+}

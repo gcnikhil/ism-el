@@ -1,0 +1,2 @@
+scenario,seed,data_wait_ms_context,data_wait_ms_noctx,throughput_context,throughput_noctx,fast_hit_rate_context,fast_hit_rate_noctx,migration_bytes_context,migration_bytes_noctx,data_wait_saved_ms
+B,0,857.0218461921326,879.4623618171398,10335.55899173485,9952.149862156179,0.8866213151927438,1.0,552105105.0,618790367.0,22.440515625007265

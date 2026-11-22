@@ -1,0 +1,22 @@
+{
+  "policies": [
+    "allslow",
+    "lru",
+    "clairvoyant",
+    "belady"
+  ],
+  "virtual_data_wait_ms": [
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "real_data_wait_ms": [
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "spearman_rho": null,
+  "pairwise_agreement": 1.0
+}

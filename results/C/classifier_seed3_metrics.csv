@@ -1,0 +1,15 @@
+name,value,run_id,seed,scenario,policy
+data_wait_ms,778.9606293951068,C-classifier-seed3,3,C,classifier
+data_wait_pct,5.543197553248965,C-classifier-seed3,3,C,classifier
+throughput,10493.184219677507,C-classifier-seed3,3,C,classifier
+fast_hit_rate,0.8866213151927438,C-classifier-seed3,3,C,classifier
+mid_hit_rate,0.11337868480725624,C-classifier-seed3,3,C,classifier
+slow_hit_rate,0.0,C-classifier-seed3,3,C,classifier
+migration_bytes,534548649.0,C-classifier-seed3,3,C,classifier
+wasted_prefetch_bytes,0.0,C-classifier-seed3,3,C,classifier
+latency_mean_ms,0.09903596506962159,C-classifier-seed3,3,C,classifier
+latency_p95_ms,0.5007890625,C-classifier-seed3,3,C,classifier
+latency_p99_ms,0.5007890625,C-classifier-seed3,3,C,classifier
+elapsed_ms,14052.550390136184,C-classifier-seed3,3,C,classifier
+read_count,5292.0,C-classifier-seed3,3,C,classifier
+sample_count,147456.0,C-classifier-seed3,3,C,classifier

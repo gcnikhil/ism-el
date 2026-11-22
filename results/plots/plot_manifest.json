@@ -1,0 +1,54 @@
+{
+  "phase": 9,
+  "source_tables": [
+    "results\\full\\raw_runs.csv",
+    "results\\full\\summary.csv",
+    "results\\full\\sweep_runs.csv",
+    "results\\full\\sweep_summary.csv"
+  ],
+  "formats": [
+    "pdf",
+    "png"
+  ],
+  "figures": {
+    "data_wait_all": [
+      "results\\plots\\data_wait_all.pdf",
+      "results\\plots\\data_wait_all.png"
+    ],
+    "data_wait_deployable": [
+      "results\\plots\\data_wait_deployable.pdf",
+      "results\\plots\\data_wait_deployable.png"
+    ],
+    "scenario_c_focus": [
+      "results\\plots\\scenario_c_focus.pdf",
+      "results\\plots\\scenario_c_focus.png"
+    ],
+    "capacity_sweep": [
+      "results\\plots\\capacity_sweep.pdf",
+      "results\\plots\\capacity_sweep.png"
+    ],
+    "compute_sweep": [
+      "results\\plots\\compute_sweep.pdf",
+      "results\\plots\\compute_sweep.png"
+    ],
+    "compute_gain": [
+      "results\\plots\\compute_gain.pdf",
+      "results\\plots\\compute_gain.png"
+    ],
+    "context_ablation": [
+      "results\\plots\\context_ablation.pdf",
+      "results\\plots\\context_ablation.png"
+    ],
+    "latency_percentiles": [
+      "results\\plots\\latency_percentiles.pdf",
+      "results\\plots\\latency_percentiles.png"
+    ]
+  },
+  "honesty_notes": [
+    "All plotted values come from the user's Phase 8 runs; no numbers are invented.",
+    "Error bars are the sample std over the configured seeds; the ablation and gain figures use paired per-seed differences.",
+    "compute_gain draws the measured CPU step median read from results/real/step_time_benchmark.json; no value is hard-coded.",
+    "Oracle and declared-type policies are labeled as such in every figure legend or axis.",
+    "The all-policies figure uses a symlog x-axis because AllSlow and Scenario D differ by orders of magnitude."
+  ]
+}

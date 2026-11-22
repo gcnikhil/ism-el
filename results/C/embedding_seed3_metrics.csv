@@ -1,0 +1,15 @@
+name,value,run_id,seed,scenario,policy
+data_wait_ms,801.3824682623107,C-embedding-seed3,3,C,embedding
+data_wait_pct,5.486693972966384,C-embedding-seed3,3,C,embedding
+throughput,10095.628223961992,C-embedding-seed3,3,C,embedding
+fast_hit_rate,1.0,C-embedding-seed3,3,C,embedding
+mid_hit_rate,0.0,C-embedding-seed3,3,C,embedding
+slow_hit_rate,0.0,C-embedding-seed3,3,C,embedding
+migration_bytes,601540389.0,C-embedding-seed3,3,C,embedding
+wasted_prefetch_bytes,0.0,C-embedding-seed3,3,C,embedding
+latency_mean_ms,0.049074791364028245,C-embedding-seed3,3,C,embedding
+latency_p95_ms,0.060131510416666666,C-embedding-seed3,3,C,embedding
+latency_p99_ms,0.060131510416666666,C-embedding-seed3,3,C,embedding
+elapsed_ms,14605.92612255797,C-embedding-seed3,3,C,embedding
+read_count,5292.0,C-embedding-seed3,3,C,embedding
+sample_count,147456.0,C-embedding-seed3,3,C,embedding

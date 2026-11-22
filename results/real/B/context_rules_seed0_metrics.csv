@@ -1,0 +1,16 @@
+name,value,run_id,seed,scenario,policy
+data_wait_ms,66.68360000781831,real-B-context_rules-seed0,0,B,context_rules
+data_wait_pct,1.7914400815059361,real-B-context_rules-seed0,0,B,context_rules
+throughput,644.7546615824817,real-B-context_rules-seed0,0,B,context_rules
+fast_hit_rate,0.7619047619047619,real-B-context_rules-seed0,0,B,context_rules
+mid_hit_rate,0.23809523809523808,real-B-context_rules-seed0,0,B,context_rules
+slow_hit_rate,0.0,real-B-context_rules-seed0,0,B,context_rules
+migration_bytes,9241005.0,real-B-context_rules-seed0,0,B,context_rules
+wasted_prefetch_bytes,0.0,real-B-context_rules-seed0,0,B,context_rules
+latency_mean_ms,0.15554854910714286,real-B-context_rules-seed0,0,B,context_rules
+latency_p95_ms,0.5007890625,real-B-context_rules-seed0,0,B,context_rules
+latency_p99_ms,0.5007890625,real-B-context_rules-seed0,0,B,context_rules
+elapsed_ms,3722.3461000025272,real-B-context_rules-seed0,0,B,context_rules
+read_count,84.0,real-B-context_rules-seed0,0,B,context_rules
+sample_count,2400.0,real-B-context_rules-seed0,0,B,context_rules
+mode,1.0,real-B-context_rules-seed0,0,B,context_rules
