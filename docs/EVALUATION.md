@@ -205,7 +205,7 @@ The channel only matters once non-chunk data types coexist; at the measured comp
 
 **Classifier.** Trained on A, B with seeds [0, 1, 2] (30,015 rows) and tested on held-out Scenario C with seeds [3, 4] (10,626 rows). Accuracy and macro-F1 are both 1.000; the confusion matrix is diagonal. Removing phase/op features still gives accuracy 1.000 (`classification_report.json`), so the perfect score is not evidence of a sophisticated signal: file size and temporal position suffice. These component reports were produced at the earlier 5 ms compute setting and are used only as evidence of component quality; the frozen model is evaluated in the 20-seed matrix at the measured setting.
 
-**Embeddings.** Word2Vec over opaque access sequences with reuse horizon 5: held-out accuracy 0.9991, ROC AUC 0.9990, positive rate 0.2207. The `Embedding` policy does not improve data wait; speculative nearest-neighbour prefetching was removed as an honest negative result and wasted bytes stay zero.
+**Embeddings.** Word2Vec over opaque access sequences with reuse horizon 5: held-out accuracy 0.9992, ROC AUC 0.9992, positive rate 0.2207. The `Embedding` policy does not improve data wait; speculative nearest-neighbour prefetching was removed as an honest negative result and wasted bytes stay zero.
 
 **Reinforcement learning.** Tabular Q-learning over 12 episodes, 63,756 updates, mean reward 0.8028 → 0.9701, final ε = 0.02. The saved agent has 42 state–action entries (see `agent.json`). It sees only observable features: no names, true types, oracle or declared types. DQN was deliberately omitted; the linear reference was unstable.
 
@@ -271,6 +271,7 @@ The central finding is narrower and more conditional than the earlier draft clai
 6. **NoPFS and shuffle.** Chunk-level rather than per-sample shuffling remains a documented deviation from NoPFS's full randomisation, and seed-based prefetching is a NoPFS-style reimplementation, not the original code.
 7. **Owner confirmations still open.** Full-stream Belady oracle and constructor-injected declared types remain design assumptions; they are not silently promoted to decisions.
 8. **Model switch protocol.** `cnn` remains the historical manual-budget baseline. `mlp` and profile-driven runs are isolated below `results/models/`; their timing, checkpoint size, and cross-model comparisons are reported only after the corresponding CSV/JSON artefacts exist. No CNN result is relabelled as a cross-model result.
+9. **Temperature protocol.** Scenarios E/F and `true_temp` are additive Phase-13 stress-test artefacts. Their results are isolated in `results/temperature/` and are not asserted from this A--D matrix until their CSV tables and paired-bootstrap comparisons are generated.
 
 ### 2.6 Reproducibility
 

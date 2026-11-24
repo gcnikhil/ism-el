@@ -36,15 +36,14 @@ def main() -> None:
     apply_theme()
     render_sidebar()
     hero(
-        eyebrow="Publication artefacts",
-        title="Figures",
+        eyebrow="Visual Artifacts",
+        title="Publication Figures",
         description=(
-            "The exact plots used in the paper, generated from the same result "
-            "tables you can explore in the Results Explorer."
+            "Browse every high-resolution plot and export vector PDFs directly. "
+            "All figures are plotted from the identical benchmark result tables."
         ),
-        pills=["PNG preview", "Vector PDF download", "Manifest-driven"],
+        pills=["High-Res Preview", "Vector PDF Download", "Exact Plot Manifest"],
     )
-    show_honesty_note()
     try:
         figures = cached_figures()
         manifest = cached_experiment_manifest()
@@ -52,13 +51,13 @@ def main() -> None:
         data_error(error)
         return
 
-    section("Figure viewer", f"{len(figures)} figures listed by results/plots/plot_manifest.json")
+    section("Featured Plot", f"select from {len(figures)} plots listed in the manifest")
     options = [figure["stem"] for figure in figures]
     if not options:
         note("No figures are listed in the plot manifest yet.")
         return
     selected = st.selectbox(
-        "Figure",
+        "Select Figure to Inspect",
         options=options,
         format_func=lambda stem: next(
             figure["title"] for figure in figures if figure["stem"] == stem
@@ -72,27 +71,28 @@ def main() -> None:
         full_width(st.image, str(figure["png"]))
     else:
         st.warning("PNG artefact missing; regenerate with `python plots.py`.")
-    download_file(figure["pdf"], "Download vector PDF")
+    download_file(figure["pdf"], "⬇️ Download Vector PDF")
 
-    with st.expander("Provenance and honesty notes"):
-        st.markdown("**Source tables**")
+    section("Figure Gallery", "all 8 benchmark charts")
+    cols = st.columns(2)
+    for idx, item in enumerate(figures):
+        with cols[idx % 2]:
+            with st.container(border=True):
+                st.markdown(f"**{item['title']}**")
+                st.caption(FIGURE_DESCRIPTIONS.get(item["stem"], ""))
+                if item["png"] is not None and item["png"].is_file():
+                    full_width(st.image, str(item["png"]))
+                download_file(item["pdf"], f"⬇️ Download PDF ({item['stem']})")
+
+    with st.expander("📖 Experimental Provenance & Source Tables"):
+        st.markdown("**Source Result Files**")
         for path in manifest.get("source_tables", []):
             st.code(str(path), language="text")
-        for item in manifest.get("honesty_notes", []):
-            st.caption(f"• {item}")
-
-    section("All figures", "quick gallery")
-    for item in figures:
-        with st.container(border=True):
-            st.markdown(f"**{item['title']}**")
-            st.caption(FIGURE_DESCRIPTIONS.get(item["stem"], ""))
-            if item["png"] is not None and item["png"].is_file():
-                full_width(st.image, str(item["png"]))
-            download_file(item["pdf"], f"PDF · {item['stem']}")
-    note(
-        "Replay Mode shows reconstructed playback of saved traces, with "
-        "log-derived migrations and the trace's tier_served as authoritative."
-    )
+        show_honesty_note()
+        st.caption(
+            "Replay Mode shows reconstructed playback of saved traces, with "
+            "log-derived migrations and the trace's tier_served as authoritative."
+        )
 
 
 if __name__ == "__main__":

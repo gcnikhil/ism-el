@@ -20,56 +20,56 @@
     "row_count": 30015
   },
   "test": {
-    "accuracy": 0.9990589121023904,
-    "roc_auc": 0.9989959289755443,
+    "accuracy": 0.9991530208921513,
+    "roc_auc": 0.9992445521628492,
     "row_count": 10626,
     "positive_rate": 0.2206851119894598
   },
   "policies": {
     "C": {
       "embedding": {
-        "data_wait_ms": 803.4585644537266,
-        "throughput": 10086.548712580885,
-        "fast_hit_rate": 1.0,
+        "data_wait_ms": 0.0,
+        "throughput": 732.785364298881,
+        "fast_hit_rate": 0.2603930461073318,
         "migration_bytes": 602618417.0
       },
       "lru": {
-        "data_wait_ms": 803.4772412115391,
-        "throughput": 10086.53582640615,
-        "fast_hit_rate": 1.0,
+        "data_wait_ms": 0.0,
+        "throughput": 732.7852962857803,
+        "fast_hit_rate": 0.2600151171579743,
         "migration_bytes": 602619947.0
       },
       "context_rules": {
-        "data_wait_ms": 778.9606293951177,
-        "throughput": 10484.07559253444,
-        "fast_hit_rate": 0.8866213151927438,
+        "data_wait_ms": 0.0,
+        "throughput": 734.8095306697663,
+        "fast_hit_rate": 0.2671012849584278,
         "migration_bytes": 535549675.0
       }
     },
     "A": {
       "embedding": {
-        "data_wait_ms": 857.8522846684331,
-        "throughput": 12084.087148952782,
-        "fast_hit_rate": 1.0,
-        "migration_bytes": 519071247.0
+        "data_wait_ms": 0.0,
+        "throughput": 741.5617027987589,
+        "fast_hit_rate": 0.27738704177323104,
+        "migration_bytes": 521997323.0
       },
       "lru": {
-        "data_wait_ms": 857.8522846684331,
-        "throughput": 12084.087148952782,
-        "fast_hit_rate": 1.0,
-        "migration_bytes": 519071247.0
+        "data_wait_ms": 0.0,
+        "throughput": 741.5617027987589,
+        "fast_hit_rate": 0.27738704177323104,
+        "migration_bytes": 521997323.0
       },
       "context_rules": {
-        "data_wait_ms": 857.8522846684331,
-        "throughput": 12084.087148952782,
-        "fast_hit_rate": 1.0,
-        "migration_bytes": 519071247.0
+        "data_wait_ms": 0.0,
+        "throughput": 741.5617027987589,
+        "fast_hit_rate": 0.27738704177323104,
+        "migration_bytes": 521997323.0
       },
       "clairvoyant": {
-        "data_wait_ms": 847.0838479822013,
-        "throughput": 12278.755479730662,
-        "fast_hit_rate": 1.0,
-        "migration_bytes": 519379255.0
+        "data_wait_ms": 0.0,
+        "throughput": 742.1588732530608,
+        "fast_hit_rate": 0.2976342710997443,
+        "migration_bytes": 522151327.0
       }
     }
   }

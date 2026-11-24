@@ -30,80 +30,287 @@ T = TypeVar("T")
 DEPLOYABLE_KINDS = frozenset({"observable_baseline", "learned_observable"})
 IDEALIZED_POLICIES = frozenset({"allslow", "allfast"})
 
-# Inline CSS keeps the dashboard self-contained: no theme plugin or CDN needed.
+# Inline CSS keeps the dashboard self-contained: cohesive, professional Blue & Slate engineering theme
 APP_CSS = """
 <style>
-  [data-testid="stAppViewContainer"] {
-    background: linear-gradient(180deg, #f7f9fc 0%, #ffffff 340px);
+  /* App Root & Main Background: Clean, consistent slate canvas */
+  .stApp, [data-testid="stAppViewContainer"] {
+    background-color: #f8fafc !important;
+    color: #0f172a !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
   }
-  [data-testid="stSidebar"] {
-    background: #101c2c;
+  .main .block-container {
+    max-width: 1200px;
+    padding-top: 1.8rem;
+    padding-bottom: 4rem;
   }
-  [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] p,
-  [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] li,
-  [data-testid="stSidebar"] .stCaption {
-    color: #d9e4ef;
+
+  /* Universal High-Contrast Typography */
+  h1, h2, h3, h4, h5, h6 {
+    color: #0f172a !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.02em;
   }
-  [data-testid="stSidebar"] h1, [data-testid="stSidebar"] h2,
-  [data-testid="stSidebar"] h3 {
-    color: #ffffff;
+  p, span, div, li {
+    color: #334155;
   }
+  
+  /* Widget & Slider Labels */
+  label,
+  label[data-testid="stWidgetLabel"],
+  .stSlider label,
+  .stSelectbox label,
+  .stRadio label,
+  .stMultiSelect label {
+    color: #0f172a !important;
+    font-weight: 650 !important;
+    font-size: 0.90rem !important;
+    margin-bottom: 6px !important;
+  }
+  
+  /* Sliders: Theme Blue & Slate */
+  div[data-testid="stSlider"] [data-testid="stTickBar"] div,
+  div[data-testid="stSlider"] div[data-testid="stMarkdownContainer"] p {
+    color: #64748b !important;
+    font-weight: 500 !important;
+    font-size: 0.80rem !important;
+  }
+  div[data-testid="stSlider"] [role="slider"] {
+    background-color: #2563eb !important;
+    border: 2px solid #ffffff !important;
+    box-shadow: 0 1px 3px rgba(37, 99, 235, 0.3) !important;
+    width: 18px !important;
+    height: 18px !important;
+  }
+  
+  /* Dropdowns, Inputs, and Selectboxes: 4-Sided Uniform Border */
+  div[data-baseweb="select"] {
+    border-radius: 8px !important;
+    background: #ffffff !important;
+    border: 1.5px solid #cbd5e1 !important;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02) !important;
+    transition: border-color 0.15s ease !important;
+  }
+  div[data-baseweb="select"]:hover,
+  div[data-baseweb="select"]:focus-within {
+    border-color: #2563eb !important;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1) !important;
+  }
+  div[data-baseweb="select"] * {
+    color: #0f172a !important;
+    font-size: 0.90rem !important;
+  }
+  div[data-baseweb="popover"] {
+    background-color: #ffffff !important;
+    border: 1.5px solid #cbd5e1 !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+  }
+
+  /* Buttons: Consistent Theme Blue */
+  button[kind="primary"],
+  button[data-testid="baseButton-primary"] {
+    background: #2563eb !important;
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    border: 1.5px solid #2563eb !important;
+    padding: 9px 22px !important;
+    box-shadow: 0 1px 3px rgba(37, 99, 235, 0.25) !important;
+    font-size: 0.90rem !important;
+    transition: all 0.15s ease !important;
+  }
+  button[kind="primary"]:hover,
+  button[data-testid="baseButton-primary"]:hover {
+    background: #1d4ed8 !important;
+    border-color: #1d4ed8 !important;
+  }
+  button[kind="secondary"],
+  button[data-testid="baseButton-secondary"] {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    border: 1.5px solid #cbd5e1 !important;
+    font-weight: 550 !important;
+    border-radius: 8px !important;
+    padding: 8px 20px !important;
+    font-size: 0.90rem !important;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02) !important;
+    transition: all 0.15s ease !important;
+  }
+  button[kind="secondary"]:hover,
+  button[data-testid="baseButton-secondary"]:hover {
+    background: #f8fafc !important;
+    border-color: #2563eb !important;
+    color: #2563eb !important;
+  }
+
+  /* Sidebar: Consistent Slate Panel */
+  section[data-testid="stSidebar"],
+  [data-testid="stSidebar"] > div {
+    background-color: #ffffff !important;
+    border-right: 1.5px solid #e2e8f0 !important;
+  }
+  section[data-testid="stSidebar"] * {
+    color: #334155 !important;
+  }
+  section[data-testid="stSidebar"] h1,
+  section[data-testid="stSidebar"] h2,
+  section[data-testid="stSidebar"] h3 {
+    color: #0f172a !important;
+    font-weight: 700 !important;
+  }
+
+  /* Hero Card: 4-Sided Uniform Border, Consistent Theme */
   .ct-hero {
-    border-radius: 18px;
-    padding: 28px 32px 24px;
-    background: linear-gradient(120deg, #102b45 0%, #1c5680 62%, #2e7ba6 100%);
-    color: #f6fbff;
-    box-shadow: 0 14px 34px rgba(16, 43, 69, 0.22);
-    margin-bottom: 22px;
+    border-radius: 10px;
+    padding: 24px 28px;
+    background: #ffffff !important;
+    border: 1.5px solid #cbd5e1;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+    margin-bottom: 24px;
   }
-  .ct-hero h1 { color: #ffffff; font-size: 2.25rem; margin: 0 0 6px; }
-  .ct-hero p { color: #d7e9f7; margin: 0; font-size: 1.02rem; max-width: 78ch; }
+  .ct-hero h1 {
+    color: #0f172a !important;
+    font-size: 1.85rem;
+    margin: 4px 0 8px;
+    font-weight: 750;
+    letter-spacing: -0.02em;
+  }
+  .ct-hero p {
+    color: #475569 !important;
+    margin: 0;
+    font-size: 0.95rem;
+    max-width: 80ch;
+    line-height: 1.55;
+  }
   .ct-eyebrow {
-    display: inline-block; font-size: 0.72rem; letter-spacing: 0.16em;
-    text-transform: uppercase; font-weight: 700; color: #9fd1f0;
-    margin-bottom: 10px;
+    display: inline-block;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #2563eb !important;
+    margin-bottom: 6px;
   }
-  .ct-pills { margin-top: 18px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .ct-pills {
+    margin-top: 14px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
   .ct-pill {
-    border: 1px solid rgba(255,255,255,0.32); border-radius: 999px;
-    padding: 4px 12px; font-size: 0.78rem; color: #eef7ff;
-    background: rgba(255,255,255,0.08);
+    border: 1px solid #bfdbfe;
+    border-radius: 6px;
+    padding: 3px 10px;
+    font-size: 0.78rem;
+    color: #1d4ed8 !important;
+    background: #eff6ff;
+    font-weight: 600;
   }
+
+  /* Section Headings */
   .ct-section {
-    margin: 26px 0 12px; padding-bottom: 8px;
-    border-bottom: 1px solid #dce6f0;
+    margin: 26px 0 12px;
+    padding-bottom: 8px;
+    border-bottom: 1.5px solid #e2e8f0;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
   }
-  .ct-section h2 { margin: 0; color: #14324d; font-size: 1.35rem; }
-  .ct-section span { color: #5e7a90; font-size: 0.88rem; }
+  .ct-section h2 {
+    margin: 0;
+    color: #0f172a !important;
+    font-size: 1.20rem;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+  }
+  .ct-section span {
+    color: #64748b !important;
+    font-size: 0.85rem;
+    font-weight: 450;
+  }
+
+  /* Callouts & Notes */
   .ct-note {
-    border-left: 3px solid #4b91c1; background: #eef5fb;
-    padding: 10px 14px; border-radius: 0 10px 10px 0;
-    color: #294a63; font-size: 0.9rem; margin: 12px 0;
+    border: 1.5px solid #bfdbfe;
+    background: #eff6ff;
+    padding: 10px 14px;
+    border-radius: 8px;
+    color: #1e3a8a !important;
+    font-size: 0.86rem;
+    margin: 14px 0;
+    font-weight: 450;
   }
+
+  /* Metric KPI Cards: 4-Sided Uniform Border */
   .ct-card {
-    background: #ffffff; border: 1px solid #e1e9f1; border-radius: 14px;
-    padding: 16px 18px; box-shadow: 0 3px 14px rgba(20, 50, 77, 0.06);
+    background: #ffffff !important;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 10px;
+    padding: 16px 18px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
     height: 100%;
+    transition: border-color 0.15s ease;
+  }
+  .ct-card:hover {
+    border-color: #2563eb;
   }
   .ct-card-label {
-    font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.09em;
-    color: #61809a; font-weight: 700;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #64748b !important;
+    font-weight: 600;
   }
   .ct-card-value {
-    font-size: 1.55rem; font-weight: 750; color: #14324d;
-    line-height: 1.25; margin: 6px 0 2px;
+    font-size: 1.6rem;
+    font-weight: 750;
+    color: #0f172a !important;
+    line-height: 1.25;
+    margin: 4px 0 2px;
+    letter-spacing: -0.02em;
   }
-  .ct-card-foot { font-size: 0.82rem; color: #5e7a90; }
-  div[data-testid="stMetric"] {
-    background: #ffffff; border: 1px solid #e1e9f1; border-radius: 12px;
-    padding: 10px 14px; box-shadow: 0 2px 10px rgba(20, 50, 77, 0.05);
+  .ct-card-foot {
+    font-size: 0.82rem;
+    color: #2563eb !important;
+    font-weight: 500;
   }
-  div[data-testid="stDataFrame"], div[data-testid="stTable"] {
-    border-radius: 12px; overflow: hidden;
+
+  /* Data Tables: 4-Sided Uniform Border */
+  div[data-testid="stTable"] table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1.5px solid #cbd5e1;
+    background: #ffffff !important;
   }
-  .stTabs [data-baseweb="tab-list"] { gap: 10px; }
-  .stTabs [data-baseweb="tab"] {
-    border-radius: 10px 10px 0 0; padding: 10px 16px;
+  div[data-testid="stTable"] th {
+    background: #f8fafc !important;
+    color: #1e293b !important;
+    font-weight: 650 !important;
+    padding: 10px 14px !important;
+    font-size: 0.84rem !important;
+    border-bottom: 1.5px solid #e2e8f0;
+  }
+  div[data-testid="stTable"] td {
+    padding: 9px 14px !important;
+    color: #0f172a !important;
+    border-top: 1px solid #f1f5f9;
+    font-size: 0.84rem !important;
+  }
+
+  /* Expanders: 4-Sided Uniform Border */
+  div[data-testid="stExpander"] {
+    background: #ffffff !important;
+    border: 1.5px solid #cbd5e1 !important;
+    border-radius: 8px !important;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.02) !important;
+  }
+  div[data-testid="stExpander"] summary {
+    font-weight: 600 !important;
+    color: #0f172a !important;
   }
 </style>
 """
@@ -196,35 +403,24 @@ def html_escape(text: str) -> str:
 
 def render_sidebar() -> None:
     """Render the persistent sidebar; page navigation is auto-generated."""
-    st.sidebar.title("ContextTier")
-    st.sidebar.caption("Context-aware data tiering · research dashboard")
-    st.sidebar.markdown(
-        "**Navigate**\n\n"
-        "- Overview\n"
-        "- Results Explorer\n"
-        "- Figures\n"
-        "- Replay Mode (reconstructed playback)\n\n"
-        "All numbers are read from the result files in `results/`."
-    )
+    st.sidebar.caption("Context-Aware Data Tiering · Research Testbed")
     selected_model = st.sidebar.selectbox(
-        "Model view",
+        "Model Architecture",
         options=("cnn", "mlp"),
         key="dashboard_model",
         help=(
             "Model-specific runs are stored under results/models/. The current "
-            "matrix remains the preserved CNN baseline until a model-specific "
-            "matrix is generated."
+            "matrix remains the preserved CNN baseline."
         ),
     )
-    st.sidebar.caption(f"Selected model: `{selected_model}`")
+    st.sidebar.caption(f"Active Model: `{selected_model.upper()}`")
     st.sidebar.info(
         "Replay Mode is **reconstructed playback**: migrations are rebuilt from "
         "the logged migration events, and `tier_served` is authoritative.",
-        icon="▶️",
+        icon="ℹ️",
     )
-    with st.sidebar.expander("Honesty note"):
+    with st.sidebar.expander("Research Contract & Honesty"):
         st.markdown(HONESTY_NOTE)
-    st.sidebar.caption(f"Streamlit {st.__version__}")
 
 
 def show_honesty_note() -> None:

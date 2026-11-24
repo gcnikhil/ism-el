@@ -165,15 +165,14 @@ def main() -> None:
     apply_theme()
     render_sidebar()
     hero(
-        eyebrow="Replay Mode",
-        title="Reconstructed Playback",
+        eyebrow="Trace Visualizer",
+        title="Replay Mode · Reconstructed Playback",
         description=(
-            "Step through a saved access trace. Residency is reconstructed from "
-            "logged migrations; the trace's tier_served is authoritative."
+            "Step through saved access traces access-by-access. Observe how files migrate "
+            "across tiers and inspect real-time latency and data wait."
         ),
-        pills=["Deterministic", "Log-driven", "No live simulation"],
+        pills=["Deterministic Scrubber", "Log-Driven Playback", "Authoritative Trace"],
     )
-    note(PLAYBACK_NOTE)
 
     runs = cached_replays()
     if not runs:
@@ -181,7 +180,7 @@ def main() -> None:
         return
     labels = [run.label for run in runs]
     selected = st.selectbox(
-        "Saved run",
+        "Select Saved Execution Trace",
         options=labels,
         format_func=lambda label: next(run.display_name for run in runs if run.label == label),
     )
@@ -203,20 +202,15 @@ def main() -> None:
     else:
         _set_index(st.session_state.get("replay_index", 0), total)
 
-    section("Saved run", f"{scenario_note(run.scenario)} · {run.display_name}")
-    st.caption(
-        f"Initial placement in the reconstruction: **{replay.initial_placement}**. "
-        "Served tiers always come from the trace, never from the reconstruction."
-    )
     metrics = load_run_metrics(run)
     if metrics:
         metric_cols = st.columns(3)
         for column, name in zip(metric_cols, ("data_wait_ms", "throughput", "fast_hit_rate")):
             if name in metrics:
                 with column:
-                    metric_card(name, format_metric(name, metrics[name]), "Logged run metric")
+                    metric_card(name, format_metric(name, metrics[name]), "Logged overall run metric")
 
-    section("Transport", "choose an access; auto-play advances the reconstruction")
+    section("Playback Deck", f"{total} total accesses in this recorded trace")
     index, playing, speed = _render_controls(total)
     if playing and index < total - 1:
         time.sleep(speed)
@@ -225,7 +219,7 @@ def main() -> None:
     if playing and index == total - 1:
         st.session_state["replay_playing"] = False
 
-    section("Current access", f"access {index + 1} of {total} · reconstructed playback")
+    section("Access Inspector", f"Access #{index + 1} of {total} · reconstructed playback")
     state = replay.state_at(index)
     _render_access_detail(
         dict(state.access),
@@ -233,15 +227,16 @@ def main() -> None:
     )
     _render_tiers(replay, index)
 
-    section("Logged wait timeline", "trace values up to the selected access")
+    section("I/O Wait Progression", "accumulated latency across the trace")
     full_width(st.pyplot, wait_timeline(replay, index))
-    with st.expander("Recent completed migrations used by the reconstruction"):
+    
+    with st.expander("📜 Recent Completed Migrations & Reconstruction Notes"):
         _render_recent_migrations(replay, index)
-    note(
-        PLAYBACK_NOTE + " In-flight prefetches are absent from the migration log, so "
-        "reconstructed occupancy is illustrative. Nothing here is simulated live "
-        "and no value is invented."
-    )
+        st.caption(
+            f"Initial placement: **{replay.initial_placement}**. "
+            f"{PLAYBACK_NOTE} In-flight prefetches are absent from the migration log; "
+            "reconstructed occupancy is rebuilt deterministically from completed moves."
+        )
 
 
 if __name__ == "__main__":

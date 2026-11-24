@@ -201,7 +201,16 @@ def generate_workload(
 
     if scenario == "C":
         difficulty_path = resolve_path(config["data"]["difficulty"])
-        difficulty = np.load(difficulty_path).astype(np.float32).copy()
+        if not difficulty_path.is_file():
+            from prepare_data import build_difficulty
+            difficulty = build_difficulty(
+                difficulty_path,
+                len(chunks) * chunk_size,
+                config["difficulty"],
+                int(config["seeds"][0]),
+            )
+        else:
+            difficulty = np.load(difficulty_path).astype(np.float32).copy()
     else:
         difficulty = np.zeros(len(chunks) * chunk_size, dtype=np.float32)
 

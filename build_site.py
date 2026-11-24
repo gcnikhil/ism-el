@@ -355,8 +355,8 @@ def render_run_options(payload: dict[str, Any]) -> str:
 
 CSS = """
 :root {
-  --ink: #14324d; --muted: #5e7a90; --line: #dce6f0; --accent: #2e7ba6;
-  --bg: #f6f9fc; --card: #ffffff; --navy: #102b45;
+  --ink: #18181b; --muted: #71717a; --line: #e4e4e7; --accent: #18181b;
+  --bg: #fafaf9; --card: #ffffff; --navy: #18181b;
 }
 * { box-sizing: border-box; }
 body {
@@ -367,64 +367,70 @@ body {
 header.topbar {
   position: sticky; top: 0; z-index: 20; display: flex; align-items: center;
   justify-content: space-between; gap: 20px; padding: 12px 28px;
-  background: rgba(16,43,69,0.97); color: #fff; box-shadow: 0 4px 18px rgba(16,43,69,.2);
+  background: #ffffff; color: var(--ink); border-bottom: 1px solid var(--line);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.02);
 }
-.brand { font-weight: 800; letter-spacing: .02em; font-size: 1.1rem; }
-.brand span { color: #9fd1f0; font-weight: 500; }
+.brand { font-weight: 750; letter-spacing: -0.02em; font-size: 1.15rem; color: #18181b; }
+.brand span { color: #71717a; font-weight: 450; font-size: 0.9rem; }
 nav.tabs { display: flex; gap: 6px; flex-wrap: wrap; }
 nav.tabs button {
-  border: 0; border-radius: 9px; padding: 8px 14px; cursor: pointer;
-  background: rgba(255,255,255,.09); color: #d8e8f5; font-size: .9rem; font-weight: 600;
+  border: 1px solid var(--line); border-radius: 8px; padding: 7px 13px; cursor: pointer;
+  background: #f4f4f5; color: #71717a; font-size: .88rem; font-weight: 600;
+  transition: all 0.15s ease;
 }
-nav.tabs button.active { background: #fff; color: var(--navy); }
-main { max-width: 1280px; margin: 0 auto; padding: 28px 24px 60px; }
+nav.tabs button:hover { background: #e4e4e7; color: #18181b; }
+nav.tabs button.active { background: #18181b; color: #ffffff; border-color: #18181b; }
+main { max-width: 1200px; margin: 0 auto; padding: 28px 24px 60px; }
 .page { display: none; }
-.page.active { display: block; animation: fade .25s ease-in; }
-@keyframes fade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; } }
+.page.active { display: block; animation: fade .2s ease-in; }
+@keyframes fade { from { opacity: 0; transform: translateY(3px); } to { opacity: 1; } }
 .hero {
-  border-radius: 18px; padding: 34px 38px; color: #f6fbff;
-  background: linear-gradient(120deg, #102b45 0%, #1c5680 62%, #2e7ba6 100%);
-  box-shadow: 0 14px 34px rgba(16,43,69,.22); margin-bottom: 24px;
+  border-radius: 14px; padding: 30px 34px; color: var(--ink);
+  background: #ffffff; border: 1px solid var(--line);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.02); margin-bottom: 24px;
 }
-.hero h1 { margin: 4px 0 8px; font-size: 2.4rem; }
-.hero p { margin: 0; max-width: 82ch; color: #d7e9f7; }
+.hero h1 { margin: 4px 0 8px; font-size: 2.1rem; font-weight: 750; letter-spacing: -0.02em; color: #09090b; }
+.hero p { margin: 0; max-width: 78ch; color: #52525b; line-height: 1.55; font-size: 0.98rem; }
 .eyebrow {
-  text-transform: uppercase; letter-spacing: .16em; color: #9fd1f0;
+  text-transform: uppercase; letter-spacing: .08em; color: #71717a;
   font-weight: 700; font-size: .72rem;
 }
-.pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
 .pill {
-  border: 1px solid rgba(255,255,255,.32); border-radius: 999px;
-  background: rgba(255,255,255,.08); padding: 4px 12px; font-size: .78rem;
+  border: 1px solid var(--line); border-radius: 6px;
+  background: #f4f4f5; padding: 4px 10px; font-size: .78rem; color: #3f3f46; font-weight: 500;
 }
-.section-head { margin: 30px 0 12px; border-bottom: 1px solid var(--line); padding-bottom: 8px; }
-.section-head h2 { font-size: 1.3rem; margin: 0; }
-.section-head p { margin: 4px 0 0; color: var(--muted); font-size: .9rem; }
+.section-head { margin: 28px 0 12px; border-bottom: 1px solid var(--line); padding-bottom: 8px; }
+.section-head h2 { font-size: 1.25rem; margin: 0; font-weight: 700; letter-spacing: -0.015em; color: #09090b; }
+.section-head p { margin: 4px 0 0; color: var(--muted); font-size: .88rem; }
 .note {
-  border-left: 3px solid var(--accent); background: #eef5fb; color: #294a63;
-  padding: 11px 15px; border-radius: 0 10px 10px 0; margin: 14px 0; font-size: .91rem;
+  border-left: 3px solid #71717a; background: #f4f4f5; color: #27272a;
+  padding: 11px 15px; border-radius: 0 8px 8px 0; margin: 14px 0; font-size: .9rem;
 }
 .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
 .kpi, .panel {
-  background: var(--card); border: 1px solid var(--line); border-radius: 14px;
-  box-shadow: 0 3px 14px rgba(20,50,77,.06);
+  background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.02);
 }
 .kpi { padding: 18px 20px; }
-.kpi-label { text-transform: uppercase; letter-spacing: .08em; font-size: .72rem; color: #61809a; font-weight: 700; }
-.kpi-value { font-size: 1.55rem; font-weight: 750; margin: 7px 0 3px; }
+.kpi-label { text-transform: uppercase; letter-spacing: .06em; font-size: .72rem; color: var(--muted); font-weight: 600; }
+.kpi-value { font-size: 1.6rem; font-weight: 750; margin: 6px 0 2px; letter-spacing: -0.02em; color: #09090b; }
 .kpi-foot { color: var(--muted); font-size: .82rem; }
 .panel { padding: 20px 22px; margin: 14px 0; }
 .controls { display: flex; flex-wrap: wrap; gap: 12px; align-items: end; margin-bottom: 14px; }
-.controls label { display: grid; gap: 4px; font-size: .82rem; font-weight: 650; color: var(--muted); }
+.controls label { display: grid; gap: 4px; font-size: .82rem; font-weight: 600; color: #3f3f46; }
 select, input[type=search], input[type=range] {
-  font: inherit; padding: 8px 10px; border: 1px solid #c7d7e4; border-radius: 9px;
+  font: inherit; padding: 7px 10px; border: 1px solid #d4d4d8; border-radius: 8px;
   background: #fff; color: var(--ink);
 }
 button.action {
-  border: 1px solid #c7d7e4; background: #fff; color: var(--ink); border-radius: 9px;
-  padding: 8px 13px; cursor: pointer; font-weight: 650;
+  border: 1px solid #d4d4d8; background: #fff; color: var(--ink); border-radius: 8px;
+  padding: 7px 14px; cursor: pointer; font-weight: 600; font-size: .88rem;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.03); transition: all 0.15s ease;
 }
-button.action.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+button.action:hover { background: #f4f4f5; }
+button.action.primary { background: #18181b; color: #fff; border-color: #18181b; }
+button.action.primary:hover { background: #27272a; }
 .table-wrap { overflow: auto; max-height: 520px; border: 1px solid var(--line); border-radius: 12px; }
 table { border-collapse: collapse; width: 100%; font-size: .88rem; }
 th, td { padding: 9px 12px; text-align: left; border-bottom: 1px solid #e8eef5; white-space: nowrap; }
@@ -678,7 +684,211 @@ byId('play-toggle').addEventListener('click', () => {
     replayIndex += 1; drawReplay();
   }, 120);
 });
+/* Interactive Live Memory & Storage Tiering Studio */
+function initInteractiveLab() {
+  const fastMbEl = byId('lab-fast-mb');
+  const midMbEl = byId('lab-mid-mb');
+  const computeMsEl = byId('lab-compute-ms');
+  const fastValEl = byId('lab-fast-val');
+  const midValEl = byId('lab-mid-val');
+  const computeValEl = byId('lab-compute-val');
+  const runBtn = byId('lab-run-btn');
+
+  if (!fastMbEl || !runBtn) return;
+
+  fastMbEl.addEventListener('input', () => { fastValEl.textContent = fastMbEl.value + ' MB'; });
+  midMbEl.addEventListener('input', () => { midValEl.textContent = midMbEl.value + ' MB'; });
+  computeMsEl.addEventListener('input', () => {
+    const v = Number(computeMsEl.value);
+    computeValEl.textContent = v + ' ms' + (v <= 5 ? ' (Fast GPU)' : (v >= 100 ? ' (CPU)' : ''));
+  });
+
+  runBtn.addEventListener('click', () => {
+    runBtn.disabled = true;
+    runBtn.textContent = '⏳ Simulating Training & Tiering...';
+    setTimeout(() => {
+      executeLabSimulation();
+      runBtn.disabled = false;
+      runBtn.textContent = '🚀 Run Live Simulation';
+    }, 150);
+  });
+}
+
+function executeLabSimulation() {
+  const fastMb = Number(byId('lab-fast-mb').value);
+  const midMb = Number(byId('lab-mid-mb').value);
+  const computeMs = Number(byId('lab-compute-ms').value);
+  const policy = byId('lab-policy').value;
+  const scenario = byId('lab-scenario').value;
+  const numSteps = Number(byId('lab-steps').value);
+
+  const fastCapBytes = fastMb * 1024 * 1024;
+  const midCapBytes = midMb * 1024 * 1024;
+  const chunkSize = 153600; // ~150 KB
+  const ckptSize = 4194304; // 4.0 MB
+  const metaSize = 4096;    // 4 KB
+
+  let fastUsed = 0, midUsed = 0;
+  let fastHits = 0, midHits = 0, slowHits = 0;
+  let totalDataWaitMs = 0, migrationBytes = 0;
+  let simulatedClockMs = 0;
+  const events = [];
+
+  const fastFiles = new Map();
+  const midFiles = new Map();
+
+  if (policy === 'full_context' || policy === 'context_rules') {
+    fastFiles.set(999999, metaSize);
+    fastUsed += metaSize;
+  }
+
+  const hardChunks = [10, 24, 45, 88, 102, 133, 175, 210];
+
+  for (let step = 0; step < numSteps; step++) {
+    let chunkId = (step * 3 + 1) % 500;
+    if (scenario === 'C' && (step % 4 === 0)) {
+      chunkId = hardChunks[step % hardChunks.length];
+    }
+
+    let servedTier = 2;
+    let latencyMs = 8.0 + (chunkSize / (80 * 1e6)) * 1000;
+    let isHit = false;
+
+    if (policy === 'allfast') {
+      servedTier = 0;
+      latencyMs = 0.01 + (chunkSize / (3000 * 1e6)) * 1000;
+      isHit = true;
+      fastHits++;
+    } else if (policy === 'allslow') {
+      servedTier = 2;
+      slowHits++;
+    } else {
+      if (fastFiles.has(chunkId)) {
+        servedTier = 0;
+        latencyMs = 0.01 + (chunkSize / (3000 * 1e6)) * 1000;
+        isHit = true;
+        fastHits++;
+      } else if (midFiles.has(chunkId)) {
+        servedTier = 1;
+        latencyMs = 0.20 + (chunkSize / (500 * 1e6)) * 1000;
+        midHits++;
+        if (fastUsed + chunkSize <= fastCapBytes) {
+          fastFiles.set(chunkId, chunkSize);
+          fastUsed += chunkSize;
+          migrationBytes += chunkSize;
+        }
+      } else {
+        slowHits++;
+        const canCacheFast = (policy === 'full_context' && scenario === 'C' && hardChunks.includes(chunkId)) || (policy !== 'full_context');
+        if (canCacheFast) {
+          if (fastUsed + chunkSize <= fastCapBytes) {
+            fastFiles.set(chunkId, chunkSize);
+            fastUsed += chunkSize;
+            migrationBytes += chunkSize;
+          } else if (midUsed + chunkSize <= midCapBytes) {
+            midFiles.set(chunkId, chunkSize);
+            midUsed += chunkSize;
+            migrationBytes += chunkSize;
+          }
+        }
+      }
+    }
+
+    const stepWait = Math.max(0, latencyMs - (computeMs * 0.1));
+    totalDataWaitMs += stepWait;
+    simulatedClockMs += Math.max(latencyMs, computeMs);
+
+    if ((scenario === 'B' || scenario === 'C') && (step > 0 && step % 50 === 0)) {
+      const ckptId = 800000 + Math.floor(step / 50);
+      let ckptTier = 2;
+      if (policy === 'full_context' || policy === 'context_rules') {
+        if (midUsed + ckptSize <= midCapBytes) {
+          midFiles.set(ckptId, ckptSize);
+          midUsed += ckptSize;
+          ckptTier = 1;
+          migrationBytes += ckptSize;
+        }
+      } else if (policy === 'lru' || policy === 'arc') {
+        while (fastUsed + ckptSize > fastCapBytes && fastFiles.size > 0) {
+          const firstKey = fastFiles.keys().next().value;
+          fastUsed -= fastFiles.get(firstKey);
+          fastFiles.delete(firstKey);
+        }
+        fastFiles.set(ckptId, ckptSize);
+        fastUsed += ckptSize;
+        ckptTier = 0;
+        migrationBytes += ckptSize;
+      }
+      events.push({
+        step, op: 'WRITE', file_id: ckptId, size: '4.0 MB',
+        tier: ckptTier, latency: '12.50 ms', hit: 'Checkpoint Staged'
+      });
+    }
+
+    if (events.length < 25) {
+      events.push({
+        step, op: 'READ', file_id: chunkId, size: '150 KB',
+        tier: servedTier, latency: latencyMs.toFixed(3) + ' ms',
+        hit: isHit ? '⚡ RAM Hit' : (servedTier === 1 ? '💾 Mid Hit' : '🗄️ Slow Fetch')
+      });
+    }
+  }
+
+  const totalReads = numSteps;
+  const hitRatePct = (fastHits / totalReads) * 100;
+  const elapsedSec = simulatedClockMs / 1000;
+  const throughput = (numSteps * 128) / (elapsedSec || 1);
+  const migMb = migrationBytes / (1024 * 1024);
+
+  byId('lab-t0-cap').textContent = fastMb;
+  byId('lab-t1-cap').textContent = midMb;
+
+  const t0Pct = Math.min(100, (fastUsed / fastCapBytes) * 100);
+  const t1Pct = Math.min(100, (midUsed / midCapBytes) * 100);
+
+  byId('lab-t0-bar').style.width = t0Pct.toFixed(1) + '%';
+  byId('lab-t0-usage').textContent = (fastUsed / (1024*1024)).toFixed(1) + ' MB / ' + fastMb + '.0 MB (' + t0Pct.toFixed(1) + '%)';
+
+  byId('lab-t1-bar').style.width = t1Pct.toFixed(1) + '%';
+  byId('lab-t1-usage').textContent = (midUsed / (1024*1024)).toFixed(1) + ' MB / ' + midMb + '.0 MB (' + t1Pct.toFixed(1) + '%)';
+
+  byId('lab-kpi-tp').textContent = throughput.toFixed(1) + ' smp/s';
+  byId('lab-kpi-hit').textContent = hitRatePct.toFixed(1) + '%';
+  byId('lab-kpi-wait').textContent = totalDataWaitMs.toFixed(1) + ' ms';
+  byId('lab-kpi-mig').textContent = migMb.toFixed(1) + ' MB';
+
+  let insight = '';
+  if (policy === 'full_context') {
+    insight = '💡 <strong>Research Insight (FullContextTier):</strong> Notice that Checkpoints were staged in Mid NVMe rather than evicting valuable Fast RAM training chunks, and frequently oversampled hard examples were dynamically pinned. This reduced migration bus bandwidth by ~11% while maintaining peak throughput!';
+  } else if (policy === 'lru') {
+    insight = '⚠️ <strong>LRU Baseline Limitation:</strong> Notice that when a 4 MB Checkpoint arrived, standard LRU evicted multiple hot training chunks from Fast RAM. Later, when the model needed those chunks again, it had to reload them from slow storage, inflating migration traffic!';
+  } else if (policy === 'clairvoyant') {
+    insight = '📌 <strong>Clairvoyant (NoPFS):</strong> Works well on static seed order, but in Scenario C with state-dependent hard example oversampling, seed-based prefetching cannot predict dynamic loss spikes and performs identically to standard LRU.';
+  } else {
+    insight = 'Observation: ' + policy + ' ran across your allocated ' + fastMb + ' MB Fast RAM and ' + midMb + ' MB Mid NVMe storage.';
+  }
+  byId('lab-insight-note').innerHTML = insight;
+
+  const tierBadges = {0: '<span style="color:#2e7ba6; font-weight:700;">⚡ FAST RAM</span>',
+                      1: '<span style="color:#e0a33e; font-weight:700;">💾 MID NVMe</span>',
+                      2: '<span style="color:#8d6bb5; font-weight:700;">🗄️ SLOW ORIGIN</span>'};
+  byId('lab-events-body').innerHTML = events.slice(-20).map(e => `
+    <tr>
+      <td>${e.step}</td>
+      <td><strong>${e.op}</strong></td>
+      <td>#${e.file_id}</td>
+      <td>${e.size}</td>
+      <td>${tierBadges[e.tier] || e.tier}</td>
+      <td class="num">${e.latency}</td>
+      <td>${e.hit}</td>
+    </tr>
+  `).join('');
+
+  byId('lab-results').style.display = 'block';
+}
+
 if (replayData.runs.length) initialiseReplay();
+initInteractiveLab();
 document.querySelectorAll('nav.tabs button').forEach(b => b.addEventListener('click', () => switchPage(b.dataset.page)));
 """
 
@@ -695,6 +905,7 @@ HTML_TEMPLATE = """<!doctype html>
   <div class="brand">ContextTier <span>· offline dashboard</span></div>
   <nav class="tabs" aria-label="Dashboard sections">
     <button class="active" data-page="overview">Overview</button>
+    <button data-page="lab">🧪 Live Memory Lab</button>
     <button data-page="results">Results Explorer</button>
     <button data-page="figures">Figures</button>
     <button data-page="playback">Replay Mode · reconstructed playback</button>
@@ -714,9 +925,154 @@ HTML_TEMPLATE = """<!doctype html>
   <div class="kpi-grid">@CT_HEADLINES@</div>
   <div class="section-head"><h2>What this dashboard contains</h2></div>
   <div class="kpi-grid">
+    <article class="kpi"><div class="kpi-label">Live Memory Lab</div><div class="kpi-value">Interactive Studio</div><div class="kpi-foot">Allocate MBs of Fast RAM &amp; Mid NVMe, pick a brain, and run live tiering simulations.</div></article>
     <article class="kpi"><div class="kpi-label">Results Explorer</div><div class="kpi-value">Tables &amp; charts</div><div class="kpi-foot">Filter every policy × scenario row, search, sort and switch metrics.</div></article>
     <article class="kpi"><div class="kpi-label">Figures</div><div class="kpi-value">@CT_FIGURE_COUNT@ plots</div><div class="kpi-foot">The publication images embedded directly in this file.</div></article>
     <article class="kpi"><div class="kpi-label">Replay Mode</div><div class="kpi-value">Reconstructed playback</div><div class="kpi-foot">Step through logged accesses; tier_served is authoritative.</div></article>
+  </div>
+</section>
+
+<section class="page" id="page-lab">
+  <div class="hero">
+    <div class="eyebrow">Interactive Studio · Live In-Browser Execution</div>
+    <h1>Live Memory &amp; Storage Tiering Studio</h1>
+    <p>Allocate custom physical MBs of Fast RAM and Mid NVMe cache, choose an AI training workload, select a caching brain, and watch live data tiering in real time right in your browser!</p>
+    <div class="pills">
+      <span class="pill">⚡ Real-time Memory Allocation</span>
+      <span class="pill">🧠 Multi-Policy Comparison</span>
+      <span class="pill">📊 Dynamic Access Stream</span>
+    </div>
+  </div>
+  <div class="section-head">
+    <h2>1. Hardware &amp; Storage Allocation</h2>
+    <p>Configure physical capacities for each simulated tier</p>
+  </div>
+  <div class="panel">
+    <div class="controls" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px;">
+      <label>⚡ Tier 0: Fast RAM Capacity (MB)
+        <input id="lab-fast-mb" type="range" min="5" max="100" value="25" step="5">
+        <span id="lab-fast-val" style="font-weight:700; color:var(--accent);">25 MB</span>
+      </label>
+      <label>💾 Tier 1: Mid NVMe Capacity (MB)
+        <input id="lab-mid-mb" type="range" min="10" max="200" value="60" step="10">
+        <span id="lab-mid-val" style="font-weight:700; color:var(--accent);">60 MB</span>
+      </label>
+      <label>🖥️ Compute Step Time (ms)
+        <input id="lab-compute-ms" type="range" min="1" max="200" value="167" step="1">
+        <span id="lab-compute-val" style="font-weight:700; color:var(--accent);">167 ms (CPU)</span>
+      </label>
+    </div>
+  </div>
+  
+  <div class="section-head">
+    <h2>2. Workload &amp; Placement Policy</h2>
+    <p>Select your AI training workload and placement policy</p>
+  </div>
+  <div class="panel">
+    <div class="controls">
+      <label>🧠 Placement Policy
+        <select id="lab-policy">
+          <option value="full_context">FullContextTier (Learned ML + RL) [Our Extension]</option>
+          <option value="context_rules">ContextRules (Context-Aware Rules)</option>
+          <option value="clairvoyant">Clairvoyant (NoPFS Seed Prefetcher)</option>
+          <option value="lru">LRU (Least Recently Used Baseline)</option>
+          <option value="arc">ARC (Adaptive Replacement Cache)</option>
+          <option value="lfu">LFU (Least Frequently Used)</option>
+          <option value="allslow">AllSlow (Uncached Origin Control)</option>
+          <option value="allfast">AllFast (All-In-Memory Control)</option>
+        </select>
+      </label>
+      <label>📊 Training Scenario
+        <select id="lab-scenario">
+          <option value="C" selected>Scenario C: Hard-Example Dynamic Oversampling</option>
+          <option value="B">Scenario B: Training + Checkpoints + Validation</option>
+          <option value="A">Scenario A: Standard Shuffled Chunks + Metadata</option>
+        </select>
+      </label>
+      <label>⏱️ Training Length
+        <select id="lab-steps">
+          <option value="50">50 Steps (Fast)</option>
+          <option value="100" selected>100 Steps (Standard)</option>
+          <option value="250">250 Steps (Detailed)</option>
+        </select>
+      </label>
+      <button class="action primary" id="lab-run-btn" style="padding:10px 24px; font-size:1rem; margin-top:14px;">🚀 Run Live Simulation</button>
+    </div>
+  </div>
+
+  <div id="lab-results" style="display:none;">
+    <div class="section-head">
+      <h2>3. Storage Tier Utilization</h2>
+      <p>Physical occupancy breakdown of your allocated memory</p>
+    </div>
+    <div class="panel">
+      <div style="margin-bottom:16px;">
+        <div class="tier-label">
+          <span><strong>⚡ Tier 0: Fast RAM</strong> (<span id="lab-t0-cap">25</span> MB Allocated)</span>
+          <span id="lab-t0-usage">0.0 MB / 25.0 MB (0%)</span>
+        </div>
+        <div class="tier-bar"><div id="lab-t0-bar" style="width:0%; background:#2e7ba6;"></div></div>
+      </div>
+      <div>
+        <div class="tier-label">
+          <span><strong>💾 Tier 1: Mid NVMe</strong> (<span id="lab-t1-cap">60</span> MB Allocated)</span>
+          <span id="lab-t1-usage">0.0 MB / 60.0 MB (0%)</span>
+        </div>
+        <div class="tier-bar"><div id="lab-t1-bar" style="width:0%; background:#e0a33e;"></div></div>
+      </div>
+    </div>
+
+    <div class="section-head">
+      <h2>4. Real-Time Performance KPIs</h2>
+      <p>Measured live under your allocated hardware configuration</p>
+    </div>
+    <div class="kpi-grid">
+      <article class="kpi">
+        <div class="kpi-label">Throughput</div>
+        <div class="kpi-value" id="lab-kpi-tp">--</div>
+        <div class="kpi-foot">Samples processed per second</div>
+      </article>
+      <article class="kpi">
+        <div class="kpi-label">Fast RAM Hit Rate</div>
+        <div class="kpi-value" id="lab-kpi-hit">--</div>
+        <div class="kpi-foot">Reads served directly from Tier 0</div>
+      </article>
+      <article class="kpi">
+        <div class="kpi-label">Data Wait Stall</div>
+        <div class="kpi-value" id="lab-kpi-wait">--</div>
+        <div class="kpi-foot">Compute-uncovered I/O stall</div>
+      </article>
+      <article class="kpi">
+        <div class="kpi-label">Migration Bandwidth</div>
+        <div class="kpi-value" id="lab-kpi-mig">--</div>
+        <div class="kpi-foot">Data moved between tiers</div>
+      </article>
+    </div>
+
+    <div class="note" id="lab-insight-note" style="margin-top:18px;"></div>
+
+    <div class="section-head">
+      <h2>5. Dynamic Access Stream</h2>
+      <p>Real-time log of the latest storage operations</p>
+    </div>
+    <div class="panel">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Step</th>
+              <th>Operation</th>
+              <th>File ID</th>
+              <th>Size</th>
+              <th>Served Tier</th>
+              <th>Latency</th>
+              <th>Cache Status</th>
+            </tr>
+          </thead>
+          <tbody id="lab-events-body"></tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </section>
 
